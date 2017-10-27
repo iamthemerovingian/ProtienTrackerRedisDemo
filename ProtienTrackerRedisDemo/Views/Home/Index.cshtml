@@ -1,0 +1,10 @@
+﻿@model dynamic 
+@{
+    ViewBag.Title = "Index";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<h2>Select User</h2>
+<p> User :</p>
+@Html.DropDownList("users", null, string.Empty)
+@Html.ActionLink("Create New User", "NewUser", "Users");
