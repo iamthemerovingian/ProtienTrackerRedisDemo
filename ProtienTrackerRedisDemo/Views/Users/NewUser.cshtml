@@ -1,0 +1,16 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Create User";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<h2>Create User</h2>
+<p> User Name: </p>
+@using (Html.BeginForm("Save", "Users", FormMethod.Post))
+{
+    <input type="text" id="userName" name="userName" />
+    <p>Goal :</p>
+    <input type="text" id="goal" name="goal" />
+    <input type="submit" value="save" />
+}
