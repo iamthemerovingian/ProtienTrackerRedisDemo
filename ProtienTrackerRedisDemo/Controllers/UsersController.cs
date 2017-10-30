@@ -25,6 +25,7 @@ namespace ProtienTrackerRedisDemo.Controllers
                 if (userId != null)
                 {
                     user = userClient.GetById(userId);
+                    client.RemoveItemFromSortedSet("urn:leaderboard", user.Name);
                 }
                 else
                 {
@@ -38,6 +39,8 @@ namespace ProtienTrackerRedisDemo.Controllers
                 user.Goal = goal;
                 userClient.Store(user);
                 userId = user.Id;
+                client.AddItemToSortedSet("urn:leaderboard", user.Name, user.Total);
+
             }
 
             return RedirectToAction("Index", "Tracker", new { userId });
