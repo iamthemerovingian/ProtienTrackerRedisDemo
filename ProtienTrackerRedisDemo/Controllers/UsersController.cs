@@ -60,5 +60,34 @@ namespace ProtienTrackerRedisDemo.Controllers
 
             return View("NewUser");
         }
+
+        public ActionResult Delete(long userid)
+        {
+            using (IRedisClient client = new RedisClient(new RedisEndpoint { Host = "117.20.40.28", Port = 6379, Password = "Yellow889" }))
+            {
+                var userClient = client.As<User>();
+                var user = userClient.GetById(userid);
+
+                //Set a flag for deleted User.
+                user.IsDeleted = true;
+                userClient.Store(user);
+
+                //Set a flag for deleted leaderboard entry.
+                client.RemoveItemFromSortedSet("urn:leaderboard", user.Name);
+
+
+                //Set a flag for deleted history.
+                var historyClient = client.As<int>();
+                var historyList = historyClient.Lists["urn:history:" + userid];
+                historyList.Clear();
+
+
+                ViewBag.UserName = string.Empty;
+                ViewBag.Goal = string.Empty;
+                ViewBag.UserId = string.Empty;
+            }
+
+            return View("NewUser");
+        }
     }
 }

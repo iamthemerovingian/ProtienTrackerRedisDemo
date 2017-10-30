@@ -16,7 +16,7 @@ namespace ProtienTrackerRedisDemo.Controllers
             using (IRedisClient client = new RedisClient(new RedisEndpoint { Host = "117.20.40.28", Port = 6379, Password = "Yellow889" }))
             {
                 var userClient = client.As<User>();
-                var users = userClient.GetAll();
+                var users = userClient.GetAll().Where(u => u.IsDeleted == false);
                 var userSelection = new SelectList(users, "Id", "Name", string.Empty);
 
                 ViewBag.UserId = userSelection;
