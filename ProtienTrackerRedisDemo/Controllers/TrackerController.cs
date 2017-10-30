@@ -18,12 +18,19 @@ namespace ProtienTrackerRedisDemo.Controllers
                 var userClient = client.As<User>();
                 var user = userClient.GetById(userId);
 
+                var historyClient = client.As<int>();
+                var historyList = historyClient.Lists["urn:history:" + userId];
+
                 if (amount > 0)
                 {
                     user.Total += amount;
                     userClient.Store(user);
+
+                    historyList.Prepend(amount);
+                    historyList.Trim(0, 4);
                 }
 
+                ViewBag.HistoryItems = historyList.GetAll();
                 ViewBag.UserName = user.Name;
                 ViewBag.Total = user.Total;
                 ViewBag.Goal = user.Goal;
