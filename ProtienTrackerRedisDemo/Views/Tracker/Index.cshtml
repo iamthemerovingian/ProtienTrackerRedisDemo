@@ -19,3 +19,11 @@
 <p> Total: @ViewBag.Total</p>
 <p> Goal: @ViewBag.Goal</p>
 
+<div>
+    <p> History </p>
+    @foreach(var historyItem in ViewBag.HistoryItems)
+    {
+        <p> Added Amount: @historyItem</p>
+    }
+</div>
+
