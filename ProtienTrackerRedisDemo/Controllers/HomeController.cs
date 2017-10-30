@@ -19,7 +19,7 @@ namespace ProtienTrackerRedisDemo.Controllers
                 var users = userClient.GetAll();
                 var userSelection = new SelectList(users, "Id", "Name", string.Empty);
 
-                ViewBag.Users = userSelection;
+                ViewBag.UserId = userSelection;
             }
             return View();
         }
