@@ -28,6 +28,8 @@ namespace ProtienTrackerRedisDemo.Controllers
 
                     historyList.Prepend(amount);
                     historyList.Trim(0, 4);
+
+                    client.AddItemToSortedSet("urn:leaderboard", user.Name, user.Total);
                 }
 
                 ViewBag.HistoryItems = historyList.GetAll();

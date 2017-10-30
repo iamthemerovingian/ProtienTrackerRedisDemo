@@ -18,7 +18,7 @@
 
 <p> Total: @ViewBag.Total</p>
 <p> Goal: @ViewBag.Goal</p>
-
+@Html.ActionLink("Leaderboard", "Index", "Leaderboard");
 <div>
     <p> History </p>
     @foreach(var historyItem in ViewBag.HistoryItems)
